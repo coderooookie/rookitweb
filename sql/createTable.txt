@@ -1,0 +1,6 @@
+CREATE TABLE user_tbl(
+user_id INT UNSIGNED AUTO_INCREMENT,
+PRIMARY KEY(user_id),
+user_name VARCHAR(40) NOT NULL ,
+user_password VARCHAR(20) NOT NULL
+)

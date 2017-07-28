@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script>
+        function getMyPage(){
+            var xmlHttpReq = new XMLHttpRequest();
+            xmlHttpReq.open("GET","mypage",true);
+            xmlHttpReq.send();
+            xmlHttpReq.onreadystatechange = function(){
+                if (this.readyState === 4 && this.status === 200){
+                    document.write(xmlHttpReq.responseText);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<p>test</p>
+<button onclick="getMyPage()">personal page</button>
+
+<style>
+    p{
+        text-align: center;
+    }
+</style>
+</body>
+</html>
