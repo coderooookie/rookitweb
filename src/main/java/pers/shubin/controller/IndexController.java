@@ -23,13 +23,17 @@ import javax.servlet.http.HttpServletResponse;
  * Created by hongshubin on 2017/7/27.
  */
 @Controller
-public class HelloController {
+public class IndexController {
     @Autowired
     private UserService userService;
+    @RequestMapping(value="/index",method = RequestMethod.GET)
+    public String getIndex(HttpServletRequest req, HttpServletResponse res){
+        return "index";
+    }
 
-    @RequestMapping(value="/hello",method = RequestMethod.POST)
+    @RequestMapping(value="/index",method = RequestMethod.POST)
     @ResponseBody
-    public String hello(HttpServletRequest req, HttpServletResponse res){
+    public String test(HttpServletRequest req, HttpServletResponse res){
         String result = userService.getUserByName(req.getParameter("username")).toString();
         return result;
     }
