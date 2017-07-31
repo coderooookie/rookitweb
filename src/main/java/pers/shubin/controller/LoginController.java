@@ -29,7 +29,6 @@ import java.io.IOException;
 public class LoginController {
     @RequestMapping(value = "/login",method = {RequestMethod.GET})
     public String loginPage(HttpServletRequest req){
-        System.out.println(req.getParameter("targetUrl"));
         return "login";
     }
 

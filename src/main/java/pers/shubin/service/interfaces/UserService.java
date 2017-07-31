@@ -14,6 +14,7 @@ import pers.shubin.domain.User;
  */
 public interface UserService {
     public User getUserByName(String name);
-    public boolean addUser(String username, String password);
+    public long insertUser(String username, String password);
     public boolean findUser(String username, String password);
+    public int deleteUserByName(String username, String password);
 }

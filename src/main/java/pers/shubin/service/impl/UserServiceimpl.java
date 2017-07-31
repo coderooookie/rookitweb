@@ -13,6 +13,7 @@ import pers.shubin.domain.User;
 import pers.shubin.service.interfaces.UserService;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 
 /**
  * Created by hongshubin on 2017/7/28.
@@ -21,8 +22,13 @@ import javax.annotation.Resource;
 public class UserServiceimpl implements UserService{
     @Resource
     private UserMapper userMapper;
-    public boolean addUser(String username, String password){
-        return false;
+    public long insertUser(String username, String pwd){
+        long id = userMapper.insertUser(username,pwd);
+        return id;
+    }
+    public int deleteUserByName(String username, String pwd){
+        int resultNum = userMapper.deleteUserByName(username,pwd);
+        return resultNum;
     }
     public User getUserByName(String name){
         return userMapper.getUserByName(name);

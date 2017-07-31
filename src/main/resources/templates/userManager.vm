@@ -1,0 +1,8 @@
+<form action="" method="post">
+    name:<input name="username"><br>
+    password:<input name="pwd" type="password"><br>
+    <input type="submit" value="注册用户" onclick="form.action='/userManager/add';form.submit()">
+    <input type="submit" value="删除用户" onclick="form.action='/userManager/delete';form.submit()">
+    <br>
+    <p>$!{resultString}</p>
+</form>

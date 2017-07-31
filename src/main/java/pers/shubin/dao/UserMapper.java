@@ -20,8 +20,15 @@ import java.util.List;
 public interface UserMapper {
     @Select("SELECT * FROM user_tbl WHERE user_name = #{name}")
     @Results({
-            @Result(property = "username",column = "user_name"),
-            @Result(property = "password",column = "user_password"),
+            @Result(property = "username",column = "username"),
+            @Result(property = "password",column = "pwd"),
     })
     User getUserByName(@Param("name")String name);
+
+    @Delete("DELETE FROM user_info WHERE username = #{name} AND pwd = #{pwd}")
+    int deleteUserByName(@Param("name")String name, @Param("pwd")String pwd);
+
+    @Insert("INSERT INTO user_info (username,pwd,created,modified) VALUES (#{username},#{pwd},now(),now())")
+    @Results({@Result(property = "id",column = "id")})
+    long insertUser(@Param("username")String username, @Param("pwd")String pwd);
 }
