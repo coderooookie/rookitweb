@@ -30,10 +30,13 @@ public class UserServiceimpl implements UserService{
         int resultNum = userMapper.deleteUserByName(username,pwd);
         return resultNum;
     }
-    public User getUserByName(String name){
-        return userMapper.getUserByName(name);
+
+    public User getUserByName(String username){
+        User user = userMapper.getUserByName(username);
+        return user;
     }
-    public boolean findUser(String username, String password){
-        return false;
+
+    public int checkUser(String username, String pwd){
+        return userMapper.checkUser(username, pwd);
     }
 }

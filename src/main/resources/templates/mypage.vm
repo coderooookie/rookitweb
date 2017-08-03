@@ -1,4 +1,15 @@
-<p>
-    myPage is here;
-    欢迎光临；
-</p>
+<head>
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("button").click(function () {
+                window.location.replace("/index");
+            });
+        });
+    </script>
+</head>
+<body>
+<p>myPage is here;</p>
+<p>欢迎光临；</p>
+<button>返回主页</button>
+</body>

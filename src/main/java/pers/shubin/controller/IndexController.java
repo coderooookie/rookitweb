@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class IndexController {
     @Autowired
     private UserService userService;
-    @RequestMapping(value="/index",method = RequestMethod.GET)
+    @RequestMapping(value={"","/index"},method = RequestMethod.GET)
     public String getIndex(HttpServletRequest req, HttpServletResponse res){
         return "index";
     }

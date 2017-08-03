@@ -2,20 +2,14 @@
 <head>
     <script>
         function openPage(page){
-            var xmlHttpReq = new XMLHttpRequest();
-            xmlHttpReq.open("GET",page,true);
-            xmlHttpReq.send();
-            xmlHttpReq.onreadystatechange = function(){
-                if (this.readyState === 4 && this.status === 200){
-                    document.write(xmlHttpReq.responseText);
-                }
-            }
+            window.location.replace(page);
         }
     </script>
 </head>
 <body>
 <button onclick="openPage('mypage')">查看个人页面</button><br>
-<button onclick="openPage('login')">登录</button>
+<button onclick="openPage('login')">登录</button><br>
+<button onclick="openPage('userManager')">用户管理页面</button>
 <style>
     button {
         display: inline-block;

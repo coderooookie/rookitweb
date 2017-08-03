@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import pers.shubin.domain.User;
 import pers.shubin.service.interfaces.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,11 +44,15 @@ public class userManagerController {
         ModelAndView view = new ModelAndView("userManager");
         String username = req.getParameter("username");
         String pwd = req.getParameter("pwd");
-        Long id = userService.insertUser(username, pwd);
-        Map result = new HashMap<String,Long>();
-        result.put("id",id);
-        view.addObject("resultString",result.toString());
-        System.out.println(result.toString());
+        User user = userService.getUserByName(username);
+        if (user != null) {
+            view.addObject("resultString", "用户已存在");
+        } else {
+            Long id = userService.insertUser(username, pwd);
+            Map result = new HashMap<String, Long>();
+            result.put("result", String.format("sign up %d users",id));
+            view.addObject("resultString", result.toString());
+        }
         return view;
     }
     @RequestMapping(value = "/userManager/delete",method = {RequestMethod.POST})
@@ -57,10 +62,26 @@ public class userManagerController {
         String pwd = req.getParameter("pwd");
         int resultNum = userService.deleteUserByName(username, pwd);
         Map result = new HashMap<String,Integer>();
-        result.put("resultNum",resultNum);
-        System.out.println(result.toString());
+        result.put("result",String.format("delete %d users",resultNum));
         view.addObject("resultString",result.toString());
         return view;
     }
-
+    @RequestMapping(value = "/userManager/find",method = {RequestMethod.POST})
+    public ModelAndView findUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        ModelAndView view = new ModelAndView("userManager");
+        String username = req.getParameter("username");
+        User user = userService.getUserByName(username);
+        if (user == null){
+            view.addObject("resultString","查无用户");
+        }else {
+            Map result = new HashMap<String, Long>();
+            result.put("username", user.getUsername());
+            result.put("created", user.getCreated());
+            result.put("modified", user.getModified());
+            result.put("result", "success");
+            view.addObject("resultString", result.toString());
+            System.out.println(result.toString());
+        }
+        return view;
+    }
 }

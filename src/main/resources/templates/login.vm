@@ -1,7 +1,37 @@
-<form action="login" method="post">
+<head>
+    <!--script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"-->
+    <script src="/js/jquery-3.2.1.js">
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#loginForm").submit(function(e){
+            var url = "/login"; // the script where you handle the form input.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#loginForm").serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    var targetUrl = $("#targetUrl").val();
+                    if (!targetUrl){targetUrl="/index";}
+                    if (data===0){$("#resultString").text("登录成功，页面即将跳转");window.location.replace(targetUrl);}
+                    else{$("#resultString").text("登录失败，请检查用户名密码");}
+                }
+            });
+            e.preventDefault();
+        });
+    });
+    </script>
+</head>
+<body>
+<form action="login" method="post" id="loginForm">
     name:<input name="username"><br>
-    password:<input name="password" type="password"><br>
+    password:<input name="pwd" type="password"><br>
     #set($targetUrl= $request.getParameter('targetUrl'))
-    <input type="hidden" name="targetUrl" value="$!{targetUrl}">
-    <input type="submit" value="submit">
+    <input type="hidden" name="targetUrl" value="$!{targetUrl}" id="targetUrl">
+    <input type="submit" value="登录">
 </form>
+<p id="resultString"></p>
+</body>
+
+

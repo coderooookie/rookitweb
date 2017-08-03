@@ -14,6 +14,25 @@ public class User {
    private String username;
    private String password;
 
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    private String modified;
+   private String created;
+
     public String getUsername() {
         return username;
     }

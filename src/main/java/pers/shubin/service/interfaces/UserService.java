@@ -13,8 +13,8 @@ import pers.shubin.domain.User;
  * Created by hongshubin on 2017/7/28.
  */
 public interface UserService {
-    public User getUserByName(String name);
-    public long insertUser(String username, String password);
-    public boolean findUser(String username, String password);
-    public int deleteUserByName(String username, String password);
+    public User getUserByName(String username);
+    public long insertUser(String username, String pwd);
+    public int checkUser(String username,String pwd);
+    public int deleteUserByName(String username, String pwd);
 }

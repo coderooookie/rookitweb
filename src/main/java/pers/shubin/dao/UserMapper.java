@@ -18,12 +18,13 @@ import java.util.List;
  */
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM user_tbl WHERE user_name = #{name}")
+    @Select("SELECT username,created,modified FROM user_info WHERE username = #{username}")
     @Results({
             @Result(property = "username",column = "username"),
-            @Result(property = "password",column = "pwd"),
+            @Result(property = "created",column = "created"),
+            @Result(property = "modified",column = "modified"),
     })
-    User getUserByName(@Param("name")String name);
+    User getUserByName(@Param("username")String username);
 
     @Delete("DELETE FROM user_info WHERE username = #{name} AND pwd = #{pwd}")
     int deleteUserByName(@Param("name")String name, @Param("pwd")String pwd);
@@ -31,4 +32,7 @@ public interface UserMapper {
     @Insert("INSERT INTO user_info (username,pwd,created,modified) VALUES (#{username},#{pwd},now(),now())")
     @Results({@Result(property = "id",column = "id")})
     long insertUser(@Param("username")String username, @Param("pwd")String pwd);
+
+    @Select("Select COUNT(*) FROM user_info where username=#{username} AND pwd = #{pwd}")
+    int checkUser(@Param("username")String username,  @Param("pwd")String pwd);
 }
