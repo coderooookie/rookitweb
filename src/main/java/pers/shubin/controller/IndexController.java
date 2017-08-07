@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by hongshubin on 2017/7/27.
  */
 @Controller
-public class IndexController {
+ public class IndexController{
     @Autowired
     private UserService userService;
     @RequestMapping(value={"","/index"},method = RequestMethod.GET)

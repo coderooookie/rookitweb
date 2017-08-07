@@ -14,6 +14,7 @@ import pers.shubin.service.interfaces.UserService;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by hongshubin on 2017/7/28.
@@ -38,5 +39,9 @@ public class UserServiceimpl implements UserService{
 
     public int checkUser(String username, String pwd){
         return userMapper.checkUser(username, pwd);
+    }
+
+    public List<User> getAllUsers(){
+        return userMapper.getAllUsers();
     }
 }

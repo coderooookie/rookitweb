@@ -31,7 +31,7 @@ public class User {
     }
 
     private String modified;
-   private String created;
+    private String created;
 
     public String getUsername() {
         return username;

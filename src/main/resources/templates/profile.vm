@@ -1,0 +1,30 @@
+<script src="/js/jquery-3.2.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#index").click(function () {
+            window.location.replace("/index");
+        })
+    })
+</script>
+<table border="1" align="center">
+    #if($users)
+        <tr>
+            <td>用户名</td>
+            <td>创建时间</td>
+            <td>修改时间</td>
+        </tr>
+    #end
+    #foreach($user in $users)
+        <tr>
+            <td>$user.username</td>
+            <td>$user.created</td>
+            <td>$user.modified</td>
+        </tr>
+    #end
+</table>
+<button id="index">返回主页</button>
+<style>
+    table{
+        margin:auto;
+    }
+</style>

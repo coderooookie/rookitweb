@@ -35,4 +35,7 @@ public interface UserMapper {
 
     @Select("Select COUNT(*) FROM user_info where username=#{username} AND pwd = #{pwd}")
     int checkUser(@Param("username")String username,  @Param("pwd")String pwd);
+
+    @Select("Select username,created,modified FROM user_info")
+    List<User> getAllUsers();
 }

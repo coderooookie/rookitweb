@@ -7,6 +7,7 @@ package pers.shubin.controller;
  * @lastdate:
  */
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,59 +30,62 @@ import java.util.Map;
  */
 
 @Controller
-public class userManagerController {
+public class UserManagerController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = {"/userManager","/userManager/*"},method = {RequestMethod.GET})
+    @RequestMapping(value = {"/userManager"},method = {RequestMethod.GET})
     public String getPage(HttpServletRequest req){
         return "userManager";
     }
 
 
     @RequestMapping(value = "/userManager/add",method = {RequestMethod.POST})
-    public ModelAndView insertUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        ModelAndView view = new ModelAndView("userManager");
+    @ResponseBody
+    public String insertUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        Map<String, String> resultMap = new HashMap();
         String username = req.getParameter("username");
         String pwd = req.getParameter("pwd");
         User user = userService.getUserByName(username);
         if (user != null) {
-            view.addObject("resultString", "用户已存在");
+            resultMap.put("msg","用户已存在");
+            resultMap.put("rtn","100");
         } else {
             Long id = userService.insertUser(username, pwd);
-            Map result = new HashMap<String, Long>();
-            result.put("result", String.format("sign up %d users",id));
-            view.addObject("resultString", result.toString());
+            resultMap.put("msg",String.format("sign up %d users",id));
+            resultMap.put("rtn","200");
         }
-        return view;
+        return JSON.toJSONString(resultMap);
     }
     @RequestMapping(value = "/userManager/delete",method = {RequestMethod.POST})
-    public ModelAndView deleteUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        ModelAndView view = new ModelAndView("userManager");
+    @ResponseBody
+    public String deleteUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String username = req.getParameter("username");
         String pwd = req.getParameter("pwd");
         int resultNum = userService.deleteUserByName(username, pwd);
-        Map result = new HashMap<String,Integer>();
-        result.put("result",String.format("delete %d users",resultNum));
-        view.addObject("resultString",result.toString());
-        return view;
+        Map resultMap = new HashMap<String,Integer>();
+        resultMap.put("msg",String.format("delete %d users",resultNum));
+        resultMap.put("rtn",resultNum >= 1 ? "200" : "100");
+        return JSON.toJSONString(resultMap);
     }
     @RequestMapping(value = "/userManager/find",method = {RequestMethod.POST})
-    public ModelAndView findUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        ModelAndView view = new ModelAndView("userManager");
+    @ResponseBody
+    public String findUser(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        Map<String, String> resultMap = new HashMap();
         String username = req.getParameter("username");
         User user = userService.getUserByName(username);
         if (user == null){
-            view.addObject("resultString","查无用户");
+            resultMap.put("msg","查无用户");
+            resultMap.put("rtn","100");
         }else {
-            Map result = new HashMap<String, Long>();
-            result.put("username", user.getUsername());
-            result.put("created", user.getCreated());
-            result.put("modified", user.getModified());
-            result.put("result", "success");
-            view.addObject("resultString", result.toString());
-            System.out.println(result.toString());
+            Map userMap = new HashMap<String, Long>();
+            userMap.put("username", user.getUsername());
+            userMap.put("created", user.getCreated());
+            userMap.put("modified", user.getModified());
+            userMap.put("result", "success");
+            resultMap.put("msg",JSON.toJSONString(userMap));
+            resultMap.put("rtn","200");
         }
-        return view;
+        return JSON.toJSONString(resultMap);
     }
 }

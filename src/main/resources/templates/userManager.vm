@@ -1,21 +1,27 @@
 <head>
     <script src="/js/jquery-3.2.1.js"></script>
     <script>
-        $(document).ready(function() {
-            $("button").click(function () {
-                window.location.replace("/index");
+        function post(url) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#mainForm").serialize(),
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    $("#resultString").text(result.msg);
+                }
             });
-        });
+        }
     </script>
 </head>
 <body>
-<form action="" method="post">
+<form id="mainForm" action="" method="post">
     name:<input name="username"><br>
     password:<input name="pwd" type="password"><br>
-    <input type="submit" value="注册用户" onclick="form.action='/userManager/add';form.submit()">
-    <input type="submit" value="删除用户" onclick="form.action='/userManager/delete';form.submit()">
-    <input type="submit" value="查询用户" onclick="form.action='/userManager/find';form.submit()">
 </form>
-<p>$!{resultString}</p>
-<button>返回主页</button>
+<button id="userButton" onclick="post('/userManager/add')">注册用户</button>
+<button id="s" onclick="post('/userManager/delete')">删除用户</button>
+<button id="signUp" onclick="post('/userManager/find')">查询用户</button>
+<p id="resultString"></p>
+<button id="index" onclick="window.location.replace('/index');">返回主页</button>
 </body>

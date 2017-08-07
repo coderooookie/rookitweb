@@ -1,0 +1,13 @@
+<div id="footerDiv">
+    <p id="footerP">版权所有</p>
+</div>
+<style>
+    #footerDiv{
+        background: darkred;
+    }
+    #footerP{
+        text-align: center;
+        color: white;
+        font-size: 1em;
+    }
+</style>

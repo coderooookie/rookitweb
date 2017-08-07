@@ -7,11 +7,14 @@
     </script>
 </head>
 <body>
+<div id = "buttons">
 <button onclick="openPage('mypage')">查看个人页面</button><br>
-<button onclick="openPage('login')">登录</button><br>
-<button onclick="openPage('userManager')">用户管理页面</button>
+<button onclick="openPage('login')">登录页面</button><br>
+<button onclick="openPage('userManager')">用户管理页面</button><br>
+<button onclick="openPage('users')">查看所有用户</button>
+</div>
 <style>
-    button {
+    #buttons button {
         display: inline-block;
         white-space: nowrap;
         background-color: #ccc;
@@ -28,24 +31,24 @@
         box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
     }
 
-    button:hover {
+    #buttons button:hover {
         background-color: #ddd;
         background-image: linear-gradient(top, #fafafa, #ddd);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');
     }
 
-    button:active {
+    buttons button:active {
         box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
         position: relative;
         top: 1px;
     }
 
-    button:focus {
+    #buttons button:focus {
         outline: 0;
         background: #fafafa;
     }
 
-    button:before {
+    #buttons button:before {
         background: #ccc;
         background: rgba(0,0,0,.1);
         float: left;

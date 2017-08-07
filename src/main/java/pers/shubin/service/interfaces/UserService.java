@@ -9,6 +9,8 @@ package pers.shubin.service.interfaces;
 
 import pers.shubin.domain.User;
 
+import java.util.List;
+
 /**
  * Created by hongshubin on 2017/7/28.
  */
@@ -17,4 +19,5 @@ public interface UserService {
     public long insertUser(String username, String pwd);
     public int checkUser(String username,String pwd);
     public int deleteUserByName(String username, String pwd);
+    public List<User> getAllUsers();
 }
